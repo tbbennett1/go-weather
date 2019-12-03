@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-  http.HandleFunc("/", hello)
+  http.HandleFunc("/hello", hello)
+
+  http.Handle("/", http.FileServer(http.Dir("./static")))
 
 	http.HandleFunc("/weather/", func(w http.ResponseWriter, r *http.Request) {
 		city := strings.SplitN(r.URL.Path, "/", 3)[2]
